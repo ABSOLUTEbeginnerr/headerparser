@@ -1,6 +1,5 @@
 
 require('dotenv').config();
-const requestIp = require('request-ip');
 var express = require('express');
 var app = express();
 
@@ -18,11 +17,8 @@ app.get('/', function (req, res) {
 });
 
 
-
-app.use(requestIp.mw());
-
 app.get('/api/whoami', (req, res) => {
-  const ipaddress = req.clientIp;
+  const ipaddress = req.socket.remoteAddress;
   const language = req.headers['accept-language'];
   const software = req.headers['user-agent'];
 
